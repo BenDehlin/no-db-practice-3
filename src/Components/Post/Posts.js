@@ -6,18 +6,19 @@ import '../../Styles/Posts.css'
 
 
 export default function Posts(props){
-  const {posts, handleDelete, handleEdit} = props
-  let list = posts.map((post, index) => {
+  const {list, handleDelete, handleEdit, type} = props
+  let mappedList = list.map((item, index) => {
     return <Post 
+              type={type}
               key={index} 
-              post={post}
+              item={item}
               handleDelete={handleDelete}
               handleEdit={handleEdit} />
   })
   return(
     <div>
-      <h1>POSTS:</h1>
-      <div>{list}</div>
+      <h1>{type}:</h1>
+      <div>{mappedList}</div>
     </div>
   )
 }

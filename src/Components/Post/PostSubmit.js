@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import '../../Styles/App.css'
-import '../../Styles/PostSubmit.css'
+import '../../Styles/Submit.css'
 
 
 
@@ -21,7 +21,7 @@ export default class PostSubmit extends Component{
     const {postContent} = this.state
     const {handleSubmit} = this.props
     return(
-      <section className="post-form">
+      <section className="form">
         <textarea
           className="post-field" 
           name='postContent' 

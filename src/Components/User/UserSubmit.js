@@ -1,14 +1,16 @@
 import React, {Component} from 'react'
 import '../../Styles/App.css'
-import '../../Styles/UserSubmit.css'
+import '../../Styles/Submit.css'
 
 
 export default class UserSubmit extends Component{
   constructor(props){
     super(props)
+    let {id, name, age} = this.props || ''
     this.state = {
-      userNameInput: '',
-      userAgeInput: ''
+      id,
+      name: name,
+      age: age
     }
   }
   handleChange=({name, value}) => {
@@ -16,34 +18,37 @@ export default class UserSubmit extends Component{
   }
 
   handleSubmit = () =>{
-    const {userNameInput, userAgeInput} = this.state
+    const {name, age} = this.state
     let user = {
-      name: userNameInput,
-      age: userAgeInput
+      name: name,
+      age: age
     }
     this.props.handleSubmit(user, 'post', 'users')
   }
 
   render(){
-    const {userNameInput, userAgeInput} = this.state
+    const {name, age} = this.state
     return(
-      <div className = "user-form">
+      <div className = "form">
         <input 
           className = "user-input"
-          name = "userNameInput"
-          value = {userNameInput}
+          name = "name"
+          value = {name}
           placeholder = "Enter Name"
           onChange = {(e) => this.handleChange(e.target)}
         />
         <input
           className = "user-input"
-          name = "userAgeInput"
-          value = {userAgeInput}
+          name = "age"
+          value = {age}
           placeholder = "Age"
           onChange = {(e) => this.handleChange(e.target)}
         />
         <button
-          onClick={() => this.handleSubmit()}
+          onClick={() => {
+            this.handleSubmit()
+            this.setState({name: '', age: ''})
+          }}
         >Submit</button>
       </div>
     )

@@ -3,7 +3,7 @@
   min-height: 100vh;
   display: flex;
   flex-flow: row;  
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .user-section{
@@ -11,7 +11,7 @@
   display: flex;
   flex-flow: column;
   align-items: center;
-  width: 50%;
+  min-width: 33%;
 }
 
 .post-section{
@@ -19,8 +19,18 @@
   display: flex;
   flex-flow: column;
   align-items: center;
-  width: 50%;
+  min-width: 34%;
 }
+
+.car-section{
+  background-color: blue;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  min-width: 33%;
+}
+
+
 
 button{
   max-width: 50px;

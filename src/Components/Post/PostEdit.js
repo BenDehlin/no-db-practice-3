@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import '../../Styles/App.css'
-import '../../Styles/PostSubmit.css'
+import '../../Styles/Submit.css'
 import '../../Styles/PostEdit.css'
 
 
@@ -22,9 +22,9 @@ export default class PostEdit extends Component{
     let {postContent, id} = this.state
     let {handleSubmit} = this.props
     return(
-      <div>
+      <div 
+        className="form">
         <textarea
-          className="post-form"
           name="postContent"
           value={postContent}
           placeholder="edit post"

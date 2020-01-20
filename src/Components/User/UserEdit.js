@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 import '../../Styles/App.css'
-import '../../Styles/UserSubmit.css'
+import '../../Styles/Submit.css'
 import '../../Styles/UserEdit.css'
 
 
 export default class UserEdit extends Component{
   constructor(props){
     super(props)
-    let {id, name, age} = this.props
+    let {id, name, age} = this.props || ''
     this.state ={
       id: id,
       userNameInput: name,
@@ -31,7 +31,7 @@ export default class UserEdit extends Component{
   render(){
     const {userNameInput, userAgeInput} = this.state
     return(
-      <div className = "user-form">
+      <div className = "form">
         <input
           className = "user-input"
           name = "userNameInput"

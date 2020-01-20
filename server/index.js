@@ -5,8 +5,10 @@ const cors = require('cors')
 
 const userCtrl = require('./controllers/userController')
 const postCtrl = require('./controllers/postController')
+const carCtrl = require('./controllers/carController')
 const userUrl = '/api/users'
 const postUrl = '/api/posts'
+const carUrl = '/api/cars'
 
 app.use(express.json())
 app.use(cors())
@@ -22,6 +24,11 @@ app.get(postUrl, postCtrl.getPosts)
 app.post(postUrl, postCtrl.postPosts)
 app.put(`${postUrl}/:id`, postCtrl.putPosts)
 app.delete(`${postUrl}/:id`, postCtrl.deletePosts)
+
+app.get(carUrl, carCtrl.getCars)
+app.post(carUrl, carCtrl.postCars)
+app.put(`${carUrl}/:id`, carCtrl.putCars)
+app.delete(`${carUrl}/:id`, carCtrl.deleteCars)
 
 
 app.listen(port, ()=> console.log(`Listening on port ${port}`))
