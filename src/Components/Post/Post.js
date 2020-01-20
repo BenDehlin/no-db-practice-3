@@ -1,4 +1,7 @@
 import React from 'react'
+import '../../Styles/App.css'
+import '../../Styles/Post.css'
+
 
 
 export default function Post(props){

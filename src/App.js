@@ -1,7 +1,12 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import PostSubmit from './Components/PostSubmit'
-import Posts from './Components/Posts'
+import PostSubmit from './Components/Post/PostSubmit'
+import PostEdit from './Components/Post/PostEdit'
+import Posts from './Components/Post/Posts'
+import Users from './Components/User/Users'
+import UserSubmit from './Components/User/UserSubmit'
+import UserEdit from './Components/User/UserEdit'
+import './Styles/App.css'
 
 export default class App extends Component{
   constructor(){
@@ -10,7 +15,11 @@ export default class App extends Component{
       users: [],
       posts: [],
       userUrl: 'http://localhost:3333/api/users',
-      postUrl: 'http://localhost:3333/api/posts'
+      postUrl: 'http://localhost:3333/api/posts',
+      togglePostEdit: false,
+      toggleUserEdit: false,
+      currentPost: {},
+      currentUser: {}
     }
     this.handleChange = this.handleChange.bind(this)
     this.handlePostSubmit = this.handlePostSubmit.bind(this)
@@ -54,6 +63,26 @@ export default class App extends Component{
     }
   }
 
+  handleSubmit=(body, submitType, dataType)=>{
+    const {userUrl, postUrl} = this.state
+    console.log(userUrl)
+    const {id} = body
+    console.log(body, submitType, dataType)
+    let url = ''
+    dataType === 'users' ? url = userUrl : url = ''
+    dataType === 'posts' ? url = postUrl : url = ''
+    console.log(url)
+    if(submitType === 'post'){
+      axios.post(url, body).then(results => {
+        this.setState({[dataType]: results.data})
+      }).catch(err => console.log(err))
+    }else if(submitType === 'put'){
+      axios.put(`${url}/${id}`, body).then(results => {
+        this.setState({[dataType]: results.data})
+      })
+    }
+  }
+
   handleUserSubmit(body, submitType){
     const {userUrl} = this.state
     if(submitType === 'post'){
@@ -75,22 +104,59 @@ export default class App extends Component{
       this.setState({posts: results.data})
     }).catch(err => console.log(err))
   }
-  handleUserDelete(id){}
-  handlePostEdit(id){
-    alert(`Edit post ${id}`)
+  handleUserDelete(id){
+    alert(`Delete user ${id} coming soon`)
   }
-  handleUserEdit(id){}
+  handlePostEdit(id){
+    const {posts} = this.state
+    let post = posts.find(post => post.id === id)
+    this.setState({
+      togglePostEdit: !this.state.togglePostEdit,
+      currentPost: post
+    })
+  }
+  handleUserEdit(id){
+    const {users} = this.state
+    let user = users.find(user => user.id === id)
+    this.setState({
+      toggleUserEdit: !this.state.toggleUserEdit,
+      currentUser: user
+    })
+  }
 
   render(){
-    const {posts} = this.state
+    const {users, posts, togglePostEdit, toggleUserEdit, currentPost, currentUser} = this.state
     return(
-      <div>
-        <PostSubmit handleSubmit={this.handlePostSubmit} />
-        <Posts 
-          posts={posts} 
-          handleDelete={this.handlePostDelete}
-          handleEdit={this.handlePostEdit} />
-      </div>
+      <section className="App">
+        <section className="user-section">
+          {
+            !toggleUserEdit ?
+            <UserSubmit
+              handleSubmit={this.handleSubmit} /> :
+            <UserEdit
+              handleSubmit={this.handleSubmit}
+              user={currentUser} />
+          }
+          <Users 
+          users={users}
+          handleDelete={this.handleUserDelete}
+          handleEdit={this.handleUserEdit} />
+        </section>
+        <section className="post-section">
+          {
+            !togglePostEdit ?
+            <PostSubmit 
+              handleSubmit={this.handleSubmit} /> :
+            <PostEdit 
+              handleSubmit={this.handleSubmit}
+              post={currentPost} />
+          }
+          <Posts 
+            posts={posts} 
+            handleDelete={this.handlePostDelete}
+            handleEdit={this.handlePostEdit} />
+        </section>
+      </section>
     )
   }
 }

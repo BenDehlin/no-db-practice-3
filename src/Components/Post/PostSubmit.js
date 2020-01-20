@@ -1,4 +1,7 @@
 import React, {Component} from 'react'
+import '../../Styles/App.css'
+import '../../Styles/PostSubmit.css'
+
 
 
 export default class PostSubmit extends Component{
@@ -18,17 +21,17 @@ export default class PostSubmit extends Component{
     const {postContent} = this.state
     const {handleSubmit} = this.props
     return(
-      <section id="post-submit">
+      <section className="post-form">
         <textarea
-          id="post-field" 
+          className="post-field" 
           name='postContent' 
           value={postContent} 
           placeholder="create post" 
           onChange={(e)=> this.handleChange(e.target)} />
         <button
-          id="submit-button"
+          className="post-submit"
           onClick={()=> {
-            handleSubmit({content: postContent}, 'post')
+            handleSubmit({content: postContent}, 'post', 'posts')
             this.setState({postContent: ''})
           }}
         >Submit</button>

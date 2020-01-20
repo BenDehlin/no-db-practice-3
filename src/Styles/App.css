@@ -1,0 +1,27 @@
+.App {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-flow: row;  
+  justify-content: flex-start;
+}
+
+.user-section{
+  background-color: red;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 50%;
+}
+
+.post-section{
+  background-color: green;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 50%;
+}
+
+button{
+  max-width: 50px;
+}

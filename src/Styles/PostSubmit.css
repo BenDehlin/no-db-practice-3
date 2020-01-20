@@ -1,0 +1,6 @@
+.post-form{
+  background-color: blue;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
